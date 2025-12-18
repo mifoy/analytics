@@ -35,9 +35,11 @@
     }
 
     canvas {
+      width: 100vw;
+      height: 100vh;
       background: linear-gradient(#38bdf8, #bae6fd);
-      border-radius: 16px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      border-radius: 0;
+      box-shadow: none;
     }
 
     .hint {
@@ -55,19 +57,27 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <canvas id="game" width="360" height="520"></canvas>
+  <canvas id="game"></canvas>
   <div class="hint">Clique ou appuie sur Espace pour voler</div>
 
   <script>
     const canvas = document.getElementById('game');
     const ctx = canvas.getContext('2d');
 
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
     const gravity = 0.5;
     const jump = -8;
     const pipeGap = 130;
     const pipeWidth = 50;
 
-    let bird = { x: 80, y: 200, v: 0, r: 12 };
+    let bird = { x: 150, y: window.innerHeight / 2, v: 0, r: 18 };
     let pipes = [];
     let score = 0;
     let best = 0;
