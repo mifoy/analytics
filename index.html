@@ -1,137 +1,191 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-344HH6C92L"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-344HH6C92L');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-344HH6C92L"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-344HH6C92L');
+  </script>
 
   <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-MJKXWG7G');</script>
-<!-- End Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MJKXWG7G');</script>
+  <!-- End Google Tag Manager -->
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Storm Landing Page</title>
+  <title>Flappy Bird – One File</title>
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-    }
-
     body {
-      <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJKXWG7G"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-      height: 100vh;
-      background: linear-gradient(to bottom, #020617, #020617);
-      overflow: hidden;
-      color: white;
-    }
-
-    /* Rain */
-    .rain {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image: repeating-linear-gradient(
-        transparent,
-        transparent 2px,
-        rgba(255,255,255,0.15) 3px
-      );
-      animation: rain 0.4s linear infinite;
-      opacity: 0.4;
-    }
-
-    @keyframes rain {
-      from { background-position: 0 0; }
-      to { background-position: 0 100px; }
-    }
-
-    /* Lightning flash */
-    .flash {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: white;
-      opacity: 0;
-      animation: flash 6s infinite;
-    }
-
-    @keyframes flash {
-      0%, 95%, 100% { opacity: 0; }
-      96% { opacity: 0.8; }
-      97% { opacity: 0.2; }
-      98% { opacity: 1; }
-      99% { opacity: 0; }
-    }
-
-    /* Content */
-    .content {
-      position: relative;
-      z-index: 10;
-      height: 100%;
+      margin: 0;
+      background: linear-gradient(#60a5fa, #93c5fd);
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      text-align: center;
-      padding: 2rem;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
     }
 
-    h1 {
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      text-shadow: 0 0 20px rgba(255,255,255,0.4);
+    canvas {
+      background: linear-gradient(#38bdf8, #bae6fd);
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
     }
 
-    p {
-      margin-top: 1rem;
-      font-size: 1.2rem;
-      max-width: 600px;
-      opacity: 0.9;
-    }
-
-    .cta {
-      margin-top: 2rem;
-      padding: 1rem 2.5rem;
-      font-size: 1rem;
-      background: linear-gradient(135deg, #38bdf8, #6366f1);
-      border: none;
-      border-radius: 999px;
+    .hint {
+      position: absolute;
+      bottom: 30px;
       color: white;
-      cursor: pointer;
-      box-shadow: 0 10px 30px rgba(56,189,248,0.4);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .cta:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 40px rgba(56,189,248,0.6);
+      opacity: 0.8;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <div class="rain"></div>
-  <div class="flash"></div>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJKXWG7G"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
-  <div class="content">
-    <h1>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaah</h1>
-    <p>
-      Une landing page banale
-    </p>
-    <button class="cta">Commencer maintenant</button>
-  </div>
+  <canvas id="game" width="360" height="520"></canvas>
+  <div class="hint">Clique ou appuie sur Espace pour voler</div>
+
+  <script>
+    const canvas = document.getElementById('game');
+    const ctx = canvas.getContext('2d');
+
+    const gravity = 0.5;
+    const jump = -8;
+    const pipeGap = 130;
+    const pipeWidth = 50;
+
+    let bird = { x: 80, y: 200, v: 0, r: 12 };
+    let pipes = [];
+    let score = 0;
+    let best = 0;
+    let gameOver = false;
+
+    function reset() {
+      bird.y = 200;
+      bird.v = 0;
+      pipes = [];
+      score = 0;
+      gameOver = false;
+    }
+
+    function spawnPipe() {
+      const topHeight = Math.random() * 200 + 40;
+      pipes.push({
+        x: canvas.width,
+        top: topHeight,
+        bottom: topHeight + pipeGap,
+        passed: false
+      });
+    }
+
+    function update() {
+      if (gameOver) return;
+
+      bird.v += gravity;
+      bird.y += bird.v;
+
+      if (bird.y + bird.r > canvas.height || bird.y - bird.r < 0) {
+        endGame();
+      }
+
+      for (let pipe of pipes) {
+        pipe.x -= 2.5;
+
+        if (!pipe.passed && pipe.x + pipeWidth < bird.x) {
+          pipe.passed = true;
+          score++;
+        }
+
+        if (
+          bird.x + bird.r > pipe.x &&
+          bird.x - bird.r < pipe.x + pipeWidth &&
+          (bird.y - bird.r < pipe.top || bird.y + bird.r > pipe.bottom)
+        ) {
+          endGame();
+        }
+      }
+
+      pipes = pipes.filter(p => p.x + pipeWidth > 0);
+    }
+
+    function endGame() {
+      gameOver = true;
+      best = Math.max(best, score);
+    }
+
+    function drawBird() {
+      ctx.fillStyle = '#facc15';
+      ctx.beginPath();
+      ctx.arc(bird.x, bird.y, bird.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function drawPipes() {
+      ctx.fillStyle = '#22c55e';
+      for (let pipe of pipes) {
+        ctx.fillRect(pipe.x, 0, pipeWidth, pipe.top);
+        ctx.fillRect(pipe.x, pipe.bottom, pipeWidth, canvas.height - pipe.bottom);
+      }
+    }
+
+    function drawText() {
+      ctx.fillStyle = 'white';
+      ctx.textAlign = 'center';
+
+      ctx.font = '28px Arial';
+      ctx.fillText(score, canvas.width / 2, 60);
+
+      if (gameOver) {
+        ctx.font = '20px Arial';
+        ctx.fillText('Game Over', canvas.width / 2, canvas.height / 2 - 20);
+        ctx.fillText('Clique pour rejouer', canvas.width / 2, canvas.height / 2 + 10);
+        ctx.fillText('Best : ' + best, canvas.width / 2, canvas.height / 2 + 40);
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawPipes();
+      drawBird();
+      drawText();
+    }
+
+    function loop() {
+      update();
+      draw();
+      requestAnimationFrame(loop);
+    }
+
+    function flap() {
+      if (gameOver) reset();
+      bird.v = jump;
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.code === 'Space') flap();
+    });
+
+    canvas.addEventListener('mousedown', flap);
+    canvas.addEventListener('touchstart', flap);
+
+    setInterval(() => {
+      if (!gameOver) spawnPipe();
+    }, 1500);
+
+    loop();
+  </script>
 </body>
 </html>
